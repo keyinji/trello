@@ -29,7 +29,6 @@ export const getTodosGroupedByColumn = async () => {
 
   const columnTypes: TypedColumn[] = ["todo", "inprogress", "done"];
 
-
   for (const columnType of columnTypes) {
     if (!columns.get(columnType)) {
       columns.set(columnType, {
@@ -39,16 +38,14 @@ export const getTodosGroupedByColumn = async () => {
     }
   }
 
-  const sortedColumns = new Map(
-    Array.from(columns.entries()).sort((a,b) => (
-        columnTypes.indexOf(a[0]) - columnTypes.indexOf(b[0])
-    ))
-  )
+  const sortedColumns = Array.from(columns.entries()).sort(
+    (a: any, b: any) => columnTypes.indexOf(a[0]) - columnTypes.indexOf(b[0])
+  );
 
+  
+  const board: Board = {
+    columns: new Map(sortedColumns as [TypedColumn, Column][]),
+  }
 
-  const a = new Map(
-    Array.from(columns.entries()).sort((a,b) => (
-        console.log("h")
-    ))
-  )
+  return board
 };
